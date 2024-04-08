@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="assets.js"></script>
+    <script src="scripts.js"></script>
+    <title>Character Creator</title>
+  </head>
+
+  <body>
+    <!-- TODO needs proper styling -->
+    <h1>Character Creator</h1>
+    <div id="character-creator" class="character-creator">
+      <canvas id="character-preview" width="288" height="64"></canvas>
+      <button class="save_button" onclick="saveCharacter()">
+        Save Character
+      </button>
+      <div id="layers">
+        <!-- filled via assets.js -->
+      </div>
+      <!-- TODO maybe add a credits thing at the bottom -->
+      <p class="note">
+        This little character creator was made especially for
+        <a href="https://tuxemon.org/">Tuxemon</a>. You can use it for anything
+        of course, if it fits your needs. The license of this project including
+        code and graphics is public domain. Use it for anything, no credit
+        needed or wanted.
+      </p>
+    </div>
+  </body>
+</html>

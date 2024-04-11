@@ -4,13 +4,13 @@
   width: 200px;
 }
 
-body {
+/* body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
   background-color: #000;
   color: #aaa;
-}
+} */
 
 #character-creator {
   display: flex;
@@ -50,12 +50,10 @@ section {
 }
 
 canvas {
-  border: 1px solid #333;
+  border: 2px solid #a0938e;
 }
 
 .save_button {
-  margin-bottom: 10px;
-  padding: 10px;
   cursor: pointer;
 }
 
@@ -68,4 +66,76 @@ h1 {
 .note {
   font-size: 80%;
   max-width: 640px;
+}
+
+/* NEW styles */
+/* Palette: Zughy-32 */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #000;
+  color: #a0938e;
+}
+
+img {
+  image-rendering: optimizeSpeed; /* STOP SMOOTHING, GIVE ME SPEED */
+  image-rendering: -moz-crisp-edges; /* Firefox */
+  image-rendering: -o-crisp-edges; /* Opera */
+  image-rendering: -webkit-optimize-contrast; /* Chrome (and eventually Safari) */
+  image-rendering: pixelated; /* Universal support since 2021 */
+  image-rendering: optimize-contrast; /* CSS3 Proposed */
+  -ms-interpolation-mode: nearest-neighbor; /* IE8+ */
+}
+#wrapper {
+  max-width: 640px;
+  margin: 0 auto;
+  background-color: #302c2e;
+  height: 100vh;
+}
+
+.layer-section {
+  display: none;
+}
+
+#layer-choices {
+  margin: 0 auto 10px auto;
+  width: 80%;
+  white-space: nowrap;
+  overflow-x: auto;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+}
+
+#layer-choices img {
+  display: inline;
+  cursor: pointer;
+  border: 1px solid #564064;
+  width: 64px;
+  height: 64px;
+  margin-right: 2px;
+}
+
+#layer-choices img:hover {
+  border-color: #3978a8;
+}
+
+/* SCROLL BAR*/
+::-webkit-scrollbar {
+  width: 16px;
+  height: 16px;
+}
+::-webkit-scrollbar-track {
+  background: #564064;
+}
+::-webkit-scrollbar-thumb {
+  background: #e6482e;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #f47e1b;
+}
+
+select {
+  display: block;
 }

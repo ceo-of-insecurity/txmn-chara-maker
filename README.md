@@ -31,6 +31,9 @@ Hair has a special case, it is expected to have always 2 layers to separate the 
 
 ## Future updates
 
-- Blazin' hot style for the editor
-- More assets
 - Recolor spritesheet directly in js
+- Blazin' hot style for the editor
+- Seperate body from head for more flexibility
+- Second choice for body -> this will have impact on the clothing, so additional work is needed
+- With all that stuff from before we have lots of freedom: Finally add more assets
+- Display credits at the bottom of the page along with the spritesheet, so it can be copied into the project easily

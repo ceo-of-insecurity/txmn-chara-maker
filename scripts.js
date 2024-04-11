@@ -1,4 +1,5 @@
 const selection = {};
+const selectedPalette = {};
 let hair_back = true;
 
 /**
@@ -7,6 +8,15 @@ let hair_back = true;
  */
 function toggleSection(section_id) {
   const section = document.getElementById(section_id);
+  section.style.display = section.style.display === "block" ? "none" : "block";
+}
+
+function selectLayer(layer_name) {
+  const sections = document.getElementsByClassName("layer-section");
+  for (let i = 0; i < sections.length; i++) {
+    sections[i].style.display = "none";
+  }
+  const section = document.getElementById(layer_name + "-section");
   section.style.display = section.style.display === "block" ? "none" : "block";
 }
 
@@ -50,8 +60,10 @@ function loadImage(src, layer_name) {
  */
 function drawCharacter() {
   const canvas = document.getElementById("character-preview");
-  const ctx = canvas.getContext("2d");
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  const ctx = canvas.getContext("2d", {
+    antialias: false,
+    willReadFrequently: true,
+  });
 
   // add all images that need to be loaded to a queue
   let image_loading_promises = [];
@@ -90,9 +102,40 @@ function drawCharacter() {
     .then((images) => {
       ctx.imageSmoothingEnabled = false;
       images.sort((a, b) => a.getAttribute("depth") - b.getAttribute("depth"));
+      // clear right before drawing
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      // then draw all selected images
       images.forEach((image) => {
         ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
       });
+      // -- WIP: re-color the composed sprite with chosen palette --
+      let composedSpritesheet = ctx.getImageData(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+      );
+      for (let i = 0; i < composedSpritesheet.data.length; i += 4) {
+        const r = composedSpritesheet.data[i];
+        const g = composedSpritesheet.data[i + 1];
+        const b = composedSpritesheet.data[i + 2];
+        if (selectedPalette["body"] != undefined)
+          for (let j = 0; j < colors.body.length; j += 1) {
+            if (
+              r == colors.body[j][0] &&
+              g == colors.body[j][1] &&
+              b == colors.body[j][2]
+            ) {
+              composedSpritesheet.data[i] =
+                color_palettes.body[selectedPalette["body"]].colors[j][0];
+              composedSpritesheet.data[i + 1] =
+                color_palettes.body[selectedPalette["body"]].colors[j][1];
+              composedSpritesheet.data[i + 2] =
+                color_palettes.body[selectedPalette["body"]].colors[j][2];
+            }
+          }
+      }
+      ctx.putImageData(composedSpritesheet, 0, 0);
     })
     .catch((error) => {
       console.error("Failed to load images:", error);
@@ -109,4 +152,13 @@ function saveCharacter() {
   link.href = canvas.toDataURL();
   link.download = "character.png";
   link.click();
+}
+
+function selectPalette(layer_name, palette_index) {
+  if (palette_index === -1) {
+    delete selectedPalette[layer_name];
+  } else {
+    selectedPalette[layer_name] = palette_index;
+  }
+  drawCharacter();
 }

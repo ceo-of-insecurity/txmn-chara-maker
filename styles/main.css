@@ -1,74 +1,3 @@
-/* TODO think of a nice layout and update the styles */
-
-#layers {
-  width: 200px;
-}
-
-/* body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #000;
-  color: #aaa;
-} */
-
-#character-creator {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-section {
-  margin-bottom: 20px;
-}
-
-.section-header {
-  cursor: pointer;
-  background-color: #aaa;
-  color: #333;
-  padding: 10px;
-  margin: 0;
-}
-
-.section-content {
-  display: none;
-}
-
-/* TODO: change to match the preview sprite size */
-.sprite-selector {
-  margin: 1px;
-  padding: 2px;
-  border: 1px solid #333;
-  display: inline-block;
-  cursor: pointer;
-  width: 32px;
-  height: 32px;
-}
-
-.sprite-selector:hover {
-  border: 1px solid #aaa;
-}
-
-canvas {
-  border: 2px solid #a0938e;
-}
-
-.save_button {
-  cursor: pointer;
-}
-
-h1 {
-  width: fit-content;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.note {
-  font-size: 80%;
-  max-width: 640px;
-}
-
-/* NEW styles */
 /* Palette: Zughy-32 */
 body {
   font-family: Arial, sans-serif;
@@ -76,9 +5,6 @@ body {
   padding: 0;
   background-color: #000;
   color: #a0938e;
-}
-
-img {
   image-rendering: optimizeSpeed; /* STOP SMOOTHING, GIVE ME SPEED */
   image-rendering: -moz-crisp-edges; /* Firefox */
   image-rendering: -o-crisp-edges; /* Opera */
@@ -87,15 +13,27 @@ img {
   image-rendering: optimize-contrast; /* CSS3 Proposed */
   -ms-interpolation-mode: nearest-neighbor; /* IE8+ */
 }
+
+select {
+  display: block;
+}
+
+button {
+  cursor: pointer;
+}
+
+#character-preview {
+  border: 2px solid #564064;
+  zoom: 2;
+  display: block;
+  margin: 2px auto;
+}
+
 #wrapper {
   max-width: 640px;
   margin: 0 auto;
   background-color: #302c2e;
   height: 100vh;
-}
-
-.layer-section {
-  display: none;
 }
 
 #layer-choices {
@@ -121,6 +59,25 @@ img {
   border-color: #3978a8;
 }
 
+.layer-section {
+  display: none;
+}
+
+.sprite-selector {
+  margin: 1px;
+  padding: 2px;
+  border: 1px solid #333;
+  display: inline-block;
+  cursor: pointer;
+  width: 16px;
+  height: 32px;
+  zoom: 2;
+}
+
+.sprite-selector:hover {
+  border: 1px solid #aaa;
+}
+
 /* SCROLL BAR*/
 ::-webkit-scrollbar {
   width: 16px;
@@ -134,8 +91,4 @@ img {
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #f47e1b;
-}
-
-select {
-  display: block;
 }

@@ -102,6 +102,8 @@ const color_palettes = {
       layer_header.appendChild(document.createTextNode(layer_name));
       layer_section.appendChild(layer_header);
       if (color_palettes[layer_name]) {
+        // label for palette dropdown
+        layer_section.appendChild(document.createTextNode("Palette:"));
         // prepare palette dropdown
         const palette_dropdown = document.createElement("select");
         palette_dropdown.setAttribute("id", layer_name + "-palette-dropdown");
@@ -123,6 +125,9 @@ const color_palettes = {
         }
       }
       // -- sprite selection --
+      // label for sprite selection
+      layer_section.appendChild(document.createTextNode("Sprite:"));
+      layer_section.appendChild(document.createElement("br"));
       // sprite selection for each sprite
       sprite_list.forEach((sprite_name) => {
         // sprite selector

@@ -108,7 +108,7 @@ function drawCharacter() {
       images.forEach((image) => {
         ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
       });
-      // -- WIP: re-color the composed sprite with chosen palette --
+      // recolor composed spritesheet
       let composedSpritesheet = ctx.getImageData(
         0,
         0,
@@ -119,21 +119,28 @@ function drawCharacter() {
         const r = composedSpritesheet.data[i];
         const g = composedSpritesheet.data[i + 1];
         const b = composedSpritesheet.data[i + 2];
-        if (selectedPalette["body"] != undefined)
-          for (let j = 0; j < colors.body.length; j += 1) {
+        Object.keys(selectedPalette).forEach((layer_name) => {
+          for (let j = 0; j < colors[layer_name].length; j += 1) {
             if (
-              r == colors.body[j][0] &&
-              g == colors.body[j][1] &&
-              b == colors.body[j][2]
+              r == colors[layer_name][j][0] &&
+              g == colors[layer_name][j][1] &&
+              b == colors[layer_name][j][2]
             ) {
               composedSpritesheet.data[i] =
-                color_palettes.body[selectedPalette["body"]].colors[j][0];
+                color_palettes[layer_name][selectedPalette[layer_name]].colors[
+                  j
+                ][0];
               composedSpritesheet.data[i + 1] =
-                color_palettes.body[selectedPalette["body"]].colors[j][1];
+                color_palettes[layer_name][selectedPalette[layer_name]].colors[
+                  j
+                ][1];
               composedSpritesheet.data[i + 2] =
-                color_palettes.body[selectedPalette["body"]].colors[j][2];
+                color_palettes[layer_name][selectedPalette[layer_name]].colors[
+                  j
+                ][2];
             }
           }
+        });
       }
       ctx.putImageData(composedSpritesheet, 0, 0);
     })
@@ -146,7 +153,6 @@ function drawCharacter() {
  * save/download composed spritesheet
  */
 function saveCharacter() {
-  // TODO I think this needs an update to scale back to the normal size of the sprite sheet
   const canvas = document.getElementById("character-preview");
   const link = document.createElement("a");
   link.href = canvas.toDataURL();
@@ -154,6 +160,11 @@ function saveCharacter() {
   link.click();
 }
 
+/**
+ * Selects a palette for a layer, which is then used to recolor the composed spritesheet.
+ * @param {*} layer_name Which layer the palette is applied to.
+ * @param {*} palette_index Index of chosen palette. -1 removes an entry and uses the default colours.
+ */
 function selectPalette(layer_name, palette_index) {
   if (palette_index === -1) {
     delete selectedPalette[layer_name];

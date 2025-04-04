@@ -56,6 +56,38 @@ function loadImage(src, layer_name) {
 }
 
 /**
+ * reset character
+ */
+function resetCharacter() {
+  // clear selections
+  Object.keys(selection).forEach((layer) => {
+      selection[layer] = ""; // Reset selected sprite for all layers
+  });
+
+  // clear palettes
+  Object.keys(selectedPalette).forEach((layer) => {
+      delete selectedPalette[layer]; // Reset palette selections
+  });
+
+  // reset hair_back to its default state (e.g., true or false as needed)
+  hair_back = true;
+
+  // clear the canvas
+  const canvas = document.getElementById("character-preview");
+  const ctx = canvas.getContext("2d");
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // optionally, refresh other UI elements (like dropdowns or checkboxes)
+  const sections = document.getElementsByClassName("layer-section");
+  for (let i = 0; i < sections.length; i++) {
+      sections[i].style.display = "none"; // Hide all sections
+  }
+
+  // redraw the character with default settings
+  drawCharacter();
+}
+
+/**
  * draw spritesheet into the canvas as a preview
  */
 function drawCharacter() {

@@ -1,3 +1,6 @@
+NOTE!
+I will probably rethink this whole project. The general idea is okay, but I want a cleaner approach to make it more extensible/flexible.
+
 # txmn-chara-maker
 
 Simple character maker in plain js for tuxemon project. The generated characters are 16x32px big and have 9 images (front, back and side sprite with a retro 3 image walking cycle).
